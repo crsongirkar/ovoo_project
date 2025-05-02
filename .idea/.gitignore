@@ -1,4 +1,14 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-/vendor/
+# Ignore large, unnecessary, or dev-only files and folders
+.idea/
+vendor/
+uploads/
+twilio-php-main/
+systemm/
+.DS_Store
+*.log
+*.zip
+application.zip
+.env
+composer.lock
+install/
+Documentation.html
