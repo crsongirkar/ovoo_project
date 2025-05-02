@@ -23,8 +23,11 @@
                         <th><?php echo trans('option'); ?></th>
                         <th><?php echo trans('full_name'); ?></th>
                         <th><?php echo trans('email'); ?></th>
+                        <th><?php echo trans('Phone'); ?></th>
                         <th><?php echo trans('role'); ?></th>
+                        <th><?php echo trans('join_date'); ?></th>
                         <th><?php echo trans('last_login'); ?></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +50,12 @@
                         </td>
                         <td><strong><?php echo $user['name'];?></strong></td>
                         <td><?php echo $user['email'];?></td>
+                        <td><?php echo $user['phone'];?></td>
                         <td><?php echo $user['role'];?></td>
-                        <td><?php echo date("d-m-Y, H:i:s",strtotime($user['last_login']));?></td>                    </tr>
+                        <td><?php echo date("d-m-Y, H:i:s",strtotime($user['join_date']));?></td>  
+                        <td><?php echo date("d-m-Y, H:i:s",strtotime($user['last_login']));?></td>                    
+                    </tr>
+                        
                     <?php endforeach;?>
                 </tbody>
             </table>

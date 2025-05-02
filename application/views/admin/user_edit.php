@@ -15,8 +15,8 @@ foreach ($users as $row) :
     <input type="text" name="email" value="<?php echo $row['email']; ?>" class="form-control" placeholder="Enter email" />
   </div>
   <div class="form-group">
-    <label class="control-label"><?php echo trans('login_password'); ?></label>
-    <input type="password" name="password" class="form-control" placeholder="Enter login password" />
+    <label class="control-label"><?php echo trans('phone'); ?></label>
+    <input type="text" name="Phone" value="<?php echo $row['phone']; ?>" class="form-control" placeholder="Enter Phone Number" />
   </div>
 
 

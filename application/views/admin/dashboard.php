@@ -15,12 +15,23 @@
       </div>
     </div>
   </div>
-  
+
   <div class="col-md-3">
     <div class="widget-small warning"><i class="icon fa fa-tv fa-3x"></i>
       <div class="info">
-        <h4><?php echo trans('live_tv'); ?></h4>
-        <p><b class="counter"><?php echo $this->db->get_where('live_tv', array('publish' => '1'))->num_rows(); ?></b></p>
+        <h4><?php echo trans('Today Income'); ?></h4>
+        <p>
+          <b class="counter">
+            <?php
+            $today = date('Y-m-d');
+            $this->db->select_sum('paid_amount');
+            $this->db->where("DATE(FROM_UNIXTIME(payment_timestamp))", $today);
+            $query = $this->db->get('subscription');
+            $result = $query->row();
+            echo $result->paid_amount ?: '0';
+            ?>
+           </b>
+        </p>
       </div>
     </div>
   </div>
@@ -28,8 +39,8 @@
   <div class="col-md-3">
     <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
       <div class="info">
-        <h4><?php echo trans('stars'); ?></h4>
-        <p><b class="counter"><?php echo $this->db->get('star')->num_rows(); ?></b></p>
+        <h4><?php echo trans('Total Income'); ?></h4>
+        <p><b class="counter"><?php echo $this->db->select_sum('paid_amount')->get('subscription')->row()->paid_amount; ?></b></p>
       </div>
     </div>
   </div>
@@ -214,6 +225,7 @@
               <tr>
                 <th><?php echo trans('name'); ?></th>
                 <th><?php echo trans('email'); ?></th>
+                <th><?php echo trans('phone'); ?></th>
                 <th><?php echo trans('subscribe_at'); ?></th>
               </tr>
             </thead>
@@ -226,6 +238,7 @@
                 <tr>
                   <td><?php echo $subscriber['name']; ?></td>
                   <td><?php echo $subscriber['email']; ?></td>
+                  <td><?php echo $subscriber['phone']; ?></td>
                   <td><?php echo $subscriber['join_date']; ?></td>
                 </tr>
               <?php endforeach; ?>

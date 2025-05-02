@@ -33,6 +33,12 @@
                 <input type="email" value="<?php echo $row['email']; ?>" name="email" class="form-control" required placeholder="<?php echo trans('enter_email'); ?>" />
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><?php echo trans('phone'); ?></label>
+              <div class="col-sm-6">
+                <input type="phone" value="<?php echo $row['phone']; ?>" name="phone" class="form-control" required placeholder="<?php echo trans('Enter Phone Number'); ?>" />
+              </div>
+            </div>
             <div class="col-sm-offset-3 col-sm-9 m-t-15">
               <button type="submit" class="btn btn-primary"><span class="btn-label"><i class="fa fa-refresh"></i></span><?php echo trans('update'); ?> </button>
             </div>

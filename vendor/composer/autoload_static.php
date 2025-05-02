@@ -181,6 +181,7 @@ class ComposerStaticInit730a4f553f2f0dfeffb4fd5e327b1720
             'Dotenv\\' => 7,
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Common\\Lexer\\' => 22,
+            'Dipesh79\\LaravelPhonePe\\' => 24,
             'Dflydev\\DotAccessData\\' => 22,
         ),
         'C' => 
@@ -584,6 +585,10 @@ class ComposerStaticInit730a4f553f2f0dfeffb4fd5e327b1720
         'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+        ),
+        'Dipesh79\\LaravelPhonePe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dipesh79/laravel-phonepe/src',
         ),
         'Dflydev\\DotAccessData\\' => 
         array (

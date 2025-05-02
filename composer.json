@@ -4,6 +4,7 @@
         "guzzlehttp/guzzle": "^7.0",
         "google/apiclient": "^2.18",
         "kreait/firebase-php": "^7.18",
-        "twilio/sdk": "^8.5"
+        "twilio/sdk": "^8.5",
+        "dipesh79/laravel-phonepe": "^1.0"
     }
 }

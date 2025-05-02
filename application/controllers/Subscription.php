@@ -61,10 +61,8 @@ class Subscription extends Home_Core_Controller {
     function transaction_history($param1 = '', $param2 = ''){
         if ($this->admin_is_login != 1)
             redirect(base_url(), 'refresh');
-            
-            $this->session->unset_userdata('active_menu');
-            $this->session->set_userdata('active_menu', '3001');
-
+        $this->session->unset_userdata('active_menu');
+        $this->session->set_userdata('active_menu', '3001');
         $data['page_name']  = 'transaction_history';
         $data['page_title'] = 'Transaction History';
         $this->db->order_by('subscription_id',"desc");

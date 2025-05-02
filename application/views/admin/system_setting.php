@@ -59,26 +59,26 @@
             </div>
           </div>          
 
-<!-- DEF --/>
+<!-- DEF --/> -->
           <div class="form-group row">
             <label class="col-sm-3 control-label"><//?php echo trans('timezone'); ?></label>
             <div class="col-sm-9">
               <select class="form-control select2" name="timezone" id="timezone">
                 <?php
-				//$timezones = $this->db->get('calendar')->result_array();
-                //foreach ($timezones as $timezone) : ?>
+				$timezones = $this->db->get('calendar')->result_array();
+                foreach ($timezones as $timezone) : ?>
                     <option value="<//?php echo $timezone['timezone']; ?>"
 					<?php
-					//if($current_timezone == $timezone['timezone']): echo "selected"; 
-					//endif; //?>>
-					<?php// echo $timezone['timezone']; ?>
+					if($current_timezone == $timezone['timezone']): echo "selected"; 
+					endif; //?>>
+					<?php echo $timezone['timezone']; ?>
 					</option>
-                <?php//endforeach; ?>
+                <?php endforeach; ?>
               </select>
-              <small>Server Time: <?php//echo date('Y-m-d H:i:s');?></small>
+              <small>Server Time: <?php echo date('Y-m-d H:i:s');?></small>
             </div>
           </div>
-<!-- DEF -->
+<!-- <!-- DEF -->
 <!-- EXTRA -->
           <div class="form-group row">
             <label class="col-sm-3 control-label"><?php echo trans('timezone'); ?></label>

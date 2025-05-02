@@ -135,6 +135,87 @@
 </head>
 <body>
 <div class="container-fluid">
+
+<div class="row">
+
+<div class="col-md-3">
+    <div class="widget-small primary"><i class="icon fa fa-video-camera fa-3x"></i>
+      <div class="info">
+        <h4><?php echo trans('Weekly Income'); ?></h4>
+        <p>
+          <b class="counter">
+            <?php
+            $start_of_week = date('Y-m-d', strtotime('this week Monday'));
+            $this->db->select_sum('paid_amount');
+            $this->db->where("DATE(FROM_UNIXTIME(payment_timestamp)) >= ", $start_of_week);
+            $query = $this->db->get('subscription');
+            $result = $query->row();
+            echo $result->paid_amount ?: '0';
+            ?>
+          </b>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+<div class="col-md-3">
+    <div class="widget-small info"><i class="icon fa fa-video-camera fa-3x"></i>
+      <div class="info">
+        <h4><?php echo trans('Monthly Income'); ?></h4>
+        <p>
+          <b class="counter">
+            <?php
+            $start_of_month = date('Y-m-d');
+            $this->db->select_sum('paid_amount');
+            $this->db->where("DATE(FROM_UNIXTIME(payment_timestamp)) >= ", $start_of_month);
+            $query = $this->db->get('subscription');
+            $result = $query->row();
+            echo $result->paid_amount ?: '0';
+            ?>
+          </b>
+        </p>
+      </div>
+    </div>
+</div>
+
+  <div class="col-md-3">
+    <div class="widget-small warning"><i class="icon fa fa-tv fa-3x"></i>
+      <div class="info">
+        <h4><?php echo trans('Today Income'); ?></h4>
+        <p>
+          <b class="counter">
+            <?php
+            $today = date('Y-m-d');
+            $this->db->select_sum('paid_amount');
+            $this->db->where("DATE(FROM_UNIXTIME(payment_timestamp))", $today);
+            $query = $this->db->get('subscription');
+            $result = $query->row();
+            echo $result->paid_amount ?: '0';
+            ?>
+           </b>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
+      <div class="info">
+        <h4><?php echo trans('Total Income'); ?></h4>
+        <p>
+          <b class="counter">
+            <?php 
+            $this->db->select_sum('paid_amount');
+            $result = $this->db->get('subscription')->row();
+            echo $result->paid_amount ?: '0';
+            ?>
+          </b>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="card">
         <div class="row">
             <div class="col-sm-12">

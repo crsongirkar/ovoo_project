@@ -148,7 +148,7 @@ class User extends Home_Core_Controller{
             $data['last_login']     = date('Y-m-d H:i:s');             
             $this->db->insert('user', $data);
             $user_id                = $this->db->insert_id();
-            $trial_enable               =   $this->db->get_where('config' , array('title'=>'trial_enable'))->row()->value;
+            $trial_enable    =  $this->db->get_where('config' , array('title'=>'trial_enable'))->row()->value;
             if($trial_enable =='1'):
                 $this->subscription_model->create_trial_subscription($user_id);
             endif;

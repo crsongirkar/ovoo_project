@@ -1959,7 +1959,74 @@ class Admin extends Admin_Core_Controller {
             $this->load->view('admin/index', $data);
     }
 
-    // users
+    // old add users fucntion
+    // function manage_user($param1 = '', $param2 = ''){
+    //     if ($this->session->userdata('admin_is_login') != 1)
+    //         redirect(base_url(), 'refresh');
+    //         /* start menu active/inactive section*/
+    //         $this->session->unset_userdata('active_menu');
+    //         $this->session->set_userdata('active_menu', '15');
+    //         /* end menu active/inactive section*/ 
+
+    //         /* add new access */   
+        
+    //     if ($param1 == 'add') {
+    //         demo_check();
+    //         $data['name']           = $this->input->post('name');
+    //         // $data['username']       = $this->input->post('username');
+    //         $data['password']       = md5($this->input->post('password'));
+    //         $data['email']          = $this->input->post('email');
+    //         $data['role']           = $this->input->post('role');           
+            
+    //         $this->db->insert('user', $data);
+    //         $this->session->set_flashdata('success', trans('add_success'));
+    //         redirect($this->agent->referrer());
+    //     }
+    //     if ($param1 == 'update') {
+    //         demo_check();
+    //         $data['name']           = $this->input->post('name');
+    //         // $data['username']       = $this->input->post('username');
+    //         if($this->input->post('password')!='' || $this->input->post('password')!=NULL){
+    //             $data['password']   = md5($this->input->post('password'));
+    //         }
+            
+    //         $data['email']          = $this->input->post('email');
+    //         $data['role']           = $this->input->post('role');
+
+    //         $this->db->where('user_id', $param2);
+    //         $this->db->update('user', $data);
+    //         $this->session->set_flashdata('success', trans('update_success'));
+    //         redirect($this->agent->referrer());
+    //     }        
+    //     $name           = $this->input->get('name');
+    //     $search_string = '';
+    //     if($name !="" && $name !=NULL){
+    //         $filter['name '] = $name;
+    //         $search_string.= 'name='.$name;
+    //         $data['name'] = $name;
+    //     }
+    //     $total_rows     = $this->common_model->get_user_num_rows($name);
+    //     // page
+    //     $config                     = $this->common_model->pagination();
+    //     $config["base_url"]         = base_url() . "admin/manage_user?".$search_string;
+    //     $config["total_rows"]       = $total_rows;
+    //     $config["per_page"]         = 15;
+    //     $config["uri_segment"]      = 3;          
+    //     //$config['use_page_numbers'] = TRUE;
+    //     $config['page_query_string']= TRUE; 
+    //     $this->pagination->initialize($config);
+    //     $data['last_row_num']       =  $this->uri->segment(3);
+    //     $page                       = ($this->input->get('per_page') !="" || $this->input->get('per_page') !=NULL) ? $this->input->get('per_page') : 0;//($this->uri->segment(3)) ? $this->uri->segment(3) : 0;   
+    //     $data["users"]              = $this->common_model->get_users($name,$config["per_page"], $page);
+    //     $data["links"]              = $this->pagination->create_links();
+    //     $data['total_rows']         = $config["total_rows"];
+    //     $data['page_name']          = 'user_manage';
+    //     $data['page_title']         = 'User Management';             
+    //     $this->load->view('admin/index', $data);
+    // }
+
+    // new user_function
+    
     function manage_user($param1 = '', $param2 = ''){
         if ($this->session->userdata('admin_is_login') != 1)
             redirect(base_url(), 'refresh');
@@ -1972,11 +2039,20 @@ class Admin extends Admin_Core_Controller {
         
         if ($param1 == 'add') {
             demo_check();
+            
+            $this->db->where('phone', $this->input->post('phone'));
+            if($this->db->get('user')->num_rows() > 0) {
+                $this->session->flashdata('error', 'Phone number already registered');
+                redirect($this->agent->referrer());
+            }
             $data['name']           = $this->input->post('name');
             // $data['username']       = $this->input->post('username');
-            $data['password']       = md5($this->input->post('password'));
+            //$data['password']       = md5($this->input->post('password'));
             $data['email']          = $this->input->post('email');
-            $data['role']           = $this->input->post('role');           
+            $data['phone']          = $this->input->post('phone');
+            $data['role']           = $this->input->post('role');
+            $data['join_date']     = date('Y-m-d H:i:s');
+            $data['last_login']     = date('Y-m-d H:i:s');         
             
             $this->db->insert('user', $data);
             $this->session->set_flashdata('success', trans('add_success'));
@@ -1984,20 +2060,22 @@ class Admin extends Admin_Core_Controller {
         }
         if ($param1 == 'update') {
             demo_check();
-            $data['name']           = $this->input->post('name');
-            // $data['username']       = $this->input->post('username');
-            if($this->input->post('password')!='' || $this->input->post('password')!=NULL){
-                $data['password']   = md5($this->input->post('password'));
-            }
+            $data['name'] = $this->input->post('name');
             
-            $data['email']          = $this->input->post('email');
-            $data['role']           = $this->input->post('role');
-
+            if($this->input->post('phone') != '' && $this->input->post('phone') != NULL) {
+                $data['phone'] = $this->input->post('phone');
+            }
+            $data['phone']  = $this->input->post('phone');
+            $data['email']  = $this->input->post('email');
+            $data['role'] = $this->input->post('role');
+            $data['join_date']     = date('Y-m-d H:i:s');
+            $data['last_login']     = date('Y-m-d H:i:s');   
+            
             $this->db->where('user_id', $param2);
             $this->db->update('user', $data);
             $this->session->set_flashdata('success', trans('update_success'));
             redirect($this->agent->referrer());
-        }        
+        }       
         $name           = $this->input->get('name');
         $search_string = '';
         if($name !="" && $name !=NULL){
