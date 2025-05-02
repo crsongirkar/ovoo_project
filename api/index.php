@@ -5,7 +5,7 @@
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  */
-define('ENVIRONMENT', 'development'); // Change to 'production' after deployment
+define('ENVIRONMENT', 'production');
 
 // Redirect to installer if pre-installation
 if (ENVIRONMENT === 'pre_installation') {
@@ -24,8 +24,8 @@ if (ENVIRONMENT === 'pre_installation') {
 switch (ENVIRONMENT)
 {
     case 'development':
-        error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
-        ini_set('display_errors', 1);
+		error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED & ~E_NOTICE & ~E_WARNING);
+		ini_set('display_errors', 0);
         break;
 
     case 'testing':
